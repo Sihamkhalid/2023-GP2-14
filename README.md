@@ -1,16 +1,18 @@
-# flutter_application_1
+# TheraSense
 
-A new Flutter project.
+## Introduction
 
-## Getting Started
+TheraSense is a software that helps therapists to sense their patients activities when performed at home using accelerometer sensor. This is Release1 of the project which include some important features.
 
-This project is a starting point for a Flutter application.
+## Technology 
 
-A few resources to get you started if this is your first Flutter project:
+This project uses dart as a programming language in a Flutter framework, also it uses Visual Studio as an IDE.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Launching instructions
+1- Download the zipped folder
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2- Unzip the folder
+
+3- Open folder in vs 
+
+4- Run on Emulator
