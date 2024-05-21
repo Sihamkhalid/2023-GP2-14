@@ -16,3 +16,8 @@ This project uses dart as a programming language in a Flutter framework, also it
 3- Open folder in vs 
 
 4- Run on Emulator
+
+5-Sign in with GP account so that you can generate a report : 
+Username : gp@outlook.com
+Password : 234234GP
+Patient named Marah 
