@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 
 
 class _ChatDetailPageAppBarState extends State<ChatDetailPageAppBar> {

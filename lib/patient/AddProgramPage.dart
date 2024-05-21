@@ -1,165 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:flutter_application_1/shared/background.dart';
-// import 'AddActivityPage.dart'; // Make sure this import is correct
-// import 'package:intl/intl.dart';
-
-// class AddProgramPage extends StatefulWidget {
-//   @override
-//   _AddProgramPageState createState() => _AddProgramPageState();
-// }
-
-// class _AddProgramPageState extends State<AddProgramPage> {
-//   int programNumber = 1;
-//   bool isNumeric = true;
-//   int numberOfActivities = 1;
-//   DateTime? startDate;
-//   DateTime? endDate;
-//   final DateFormat dateFormat =
-//       DateFormat('yyyy-MM-dd'); // For displaying the date
-
-//   Future<void> _pickDate(BuildContext context, {required bool isStart}) async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate:
-//           isStart ? startDate ?? DateTime.now() : endDate ?? DateTime.now(),
-//       firstDate: DateTime(2000),
-//       lastDate: DateTime(2101),
-//     );
-//     if (picked != null) {
-//       setState(() {
-//         if (isStart) {
-//           startDate = picked;
-//         } else {
-//           endDate = picked;
-//         }
-//       });
-//     }
-//   }
-
-//   void _goToHomePage(BuildContext context) {
-//     Navigator.popUntil(context, ModalRoute.withName('/'));
-//     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//       content: Text('The program is added successfully!'),
-//       duration: Duration(seconds: 2),
-//     ));
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.all(16.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.stretch,
-//             children: <Widget>[
-//               Background(),
-//               SizedBox(height: 16),
-//               Text(
-//                 'Add program',
-//                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//                 textAlign: TextAlign.center,
-//               ),
-//               SizedBox(height: 8),
-//               Text(
-//                 'We are here to help you!',
-//                 style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-//                 textAlign: TextAlign.center,
-//               ),
-//               SizedBox(height: 30),
-//               Text(
-//                 'Program Number: $programNumber',
-//                 style: TextStyle(fontSize: 18),
-//                 textAlign: TextAlign.center,
-//               ),
-//               SizedBox(height: 20),
-//               // Existing DropdownButtonFormField...
-//               SizedBox(height: 20),
-//               TextFormField(
-//                 decoration: InputDecoration(
-//                   labelText: 'Start Date',
-//                   border: OutlineInputBorder(),
-//                   suffixIcon: Icon(Icons.calendar_today),
-//                 ),
-//                 readOnly: true,
-//                 controller: TextEditingController(
-//                     text:
-//                         startDate != null ? dateFormat.format(startDate!) : ''),
-//                 onTap: () => _pickDate(context, isStart: true),
-//               ),
-//               SizedBox(height: 20),
-//               TextFormField(
-//                 decoration: InputDecoration(
-//                   labelText: 'End Date',
-//                   border: OutlineInputBorder(),
-//                   suffixIcon: Icon(Icons.calendar_today),
-//                 ),
-//                 readOnly: true,
-//                 controller: TextEditingController(
-//                     text: endDate != null ? dateFormat.format(endDate!) : ''),
-//                 onTap: () => _pickDate(context, isStart: false),
-//               ),
-//               SizedBox(height: 20),
-//               DropdownButtonFormField<int>(
-//                 decoration: InputDecoration(
-//                   labelText: 'Number of Activities',
-//                   border: OutlineInputBorder(),
-//                 ),
-//                 value: numberOfActivities,
-//                 items: List.generate(7, (index) => index + 1)
-//                     .map<DropdownMenuItem<int>>((int value) {
-//                   return DropdownMenuItem<int>(
-//                     value: value,
-//                     child: Text(value.toString()),
-//                   );
-//                 }).toList(),
-//                 onChanged: (int? newValue) {
-//                   setState(() {
-//                     numberOfActivities = newValue ?? 1;
-//                   });
-//                 },
-//               ),
-//               SizedBox(height: 20),
-//               ElevatedButton(
-//                 onPressed: () {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                       builder: (context) => AddActivitiesPage(
-//                         programNumber: programNumber,
-//                         numberOfActivities: numberOfActivities,
-//                       ),
-//                     ),
-//                   ).then((value) {
-//                     _goToHomePage(context);
-//                   });
-//                   setState(() {
-//                     programNumber++; // Incrementing program number
-//                   });
-//                 },
-//                 child: Text('Next'),
-//                 style: ElevatedButton.styleFrom(
-//                   primary: Color(0xFF186257),
-//                   onPrimary: Colors.white,
-//                   padding: EdgeInsets.symmetric(vertical: 16.0),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(8.0),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 16),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/background.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
-import 'AddActivityPage.dart'; // Make sure this import is correct
+import 'AddActivityPage.dart'; 
 import 'package:intl/intl.dart';
 
 class AddProgramPage extends StatefulWidget {
@@ -214,17 +55,11 @@ class _AddProgramPageState extends State<AddProgramPage> {
 
 
   void _goToHomePage(BuildContext context) {
-    // Navigator.pop(context);
-    // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-    //   content: Text('The program is added successfully!'),
-    //   duration: Duration(seconds: 2),
-    // ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   //   bottomNavigationBar: const NavBar(),
       body: Stack(
         children: [
           const Background(),

@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
+
 import 'package:intl/intl.dart';
 import '../services/firestore.dart';
 
@@ -43,7 +43,7 @@ class _EmptyState extends State<Empty> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: const NavBar(),
+
         // body: Column(
         //   mainAxisAlignment: MainAxisAlignment.center,
         //   children: [

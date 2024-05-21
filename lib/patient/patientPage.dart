@@ -6,7 +6,6 @@ import 'package:flutter_application_1/patient/ReportsHistory.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../shared/nav_bar.dart';
 import '../services/models.dart';
 import '../services/firestore.dart';
 import '../patient/programPage.dart';
@@ -103,7 +102,7 @@ class _PatientPageState extends State<PatientPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF186257),
-     // bottomNavigationBar: const NavBar(),
+      // bottomNavigationBar: const NavBar(),
       body: isLoading == true
           ? Center(
               child: CircularProgressIndicator(),
@@ -206,7 +205,8 @@ class _PatientPageState extends State<PatientPage> {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                 crossAxisAlignment:CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       const Center(
                                         child: Text(

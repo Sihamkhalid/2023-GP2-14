@@ -5,7 +5,6 @@ import 'package:flutter_application_1/services/authentic.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
 import 'package:flutter_application_1/shared/background.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 
 class editprofile extends StatefulWidget {
   const editprofile({super.key});

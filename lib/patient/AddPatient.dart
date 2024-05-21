@@ -5,7 +5,6 @@ import 'package:flutter_application_1/shared/background.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_application_1/services/authentic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:quickalert/quickalert.dart';
 
 class AddPatient extends StatefulWidget {

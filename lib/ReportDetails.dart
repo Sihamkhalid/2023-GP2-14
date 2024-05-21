@@ -10,7 +10,6 @@ import 'package:flutter_application_1/home/loadingpage.dart';
 // import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'dart:math';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
@@ -226,7 +225,7 @@ Future<pw.Document> _generatePDF(Report report) async {
         ],
       ),
 
-    // Adding space between weeks and months
+ 
     pw.SizedBox(height: 10),
 
    

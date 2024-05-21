@@ -5,7 +5,6 @@ import 'package:flutter_application_1/services/authentic.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
 import 'package:flutter_application_1/shared/background.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:flutter_application_1/signin/edit_pass_auth.dart';
 
 class profile extends StatefulWidget {

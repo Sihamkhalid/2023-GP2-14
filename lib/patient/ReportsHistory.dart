@@ -4,11 +4,10 @@ import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/pickProgram.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 
 class ReportsHistory extends StatefulWidget {
   final String pid;
- 
+
   const ReportsHistory({Key? key, required this.pid}) : super(key: key);
 
   @override
@@ -120,13 +119,12 @@ class _ReportsHistoryState extends State<ReportsHistory> {
                                         MaterialPageRoute(
                                           builder: (context) => ReportDetails(
                                             pid: report.ProgramID,
-                                           
                                           ),
                                         ),
                                       );
                                     },
                                     child: Material(
-                                      elevation: 5, 
+                                      elevation: 5,
                                       borderRadius: BorderRadius.circular(16),
                                       color: Colors.white,
                                       child: ListTile(

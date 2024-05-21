@@ -4,7 +4,6 @@ import 'package:flutter_application_1/ReportDetails.dart';
 import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -30,106 +29,19 @@ class pickProgram extends StatefulWidget {
 
 class _pickProgramState extends State<pickProgram> {
   Future<void> _AddPatientNumber(String pid) async {
-    // // Check if at least one activity is selected
-    // if (_selectedActivities.contains(null)) {
-    //   setState(() {
-    //     _showError = true; // Set showError flag to true
-    //   });
-    //   return;
-    // }
-    // // Reset showError flag if no error
-    // setState(() {
-    //   _showError = false;
-    // });
-    // try {
-    //   // Get the current user
-    //   User? user = FirebaseAuth.instance.currentUser;
-
-    //   if (user != null) {
-    //     // Use the user's UID as the therapist ID
-    //     String therapistId = user.uid;
-
-    //     // Fetch current counter value for the therapist
-    //     DocumentSnapshot therapistDocSnapshot = await FirebaseFirestore.instance
-    //         .collection('Therapist')
-    //         .doc(therapistId)
-    //         .get();
-
-    //     int currentCounter = therapistDocSnapshot.exists
-    //         ? (therapistDocSnapshot.data() as Map<String, dynamic>?) != null
-    //             ? (therapistDocSnapshot.data()
-    //                     as Map<String, dynamic>?)!['programCounter'] ??
-    //                 0
-    //             : 0
-    //         : 0;
-
-    //     // Use the current counter value as the program ID
-    //     String programId = (currentCounter + 1).toString();
-
     // Retrieve the document with the specified Program ID
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Report')
         .where('Program ID', isEqualTo: pid)
         .get();
 
-// Check if any documents match the query
     if (querySnapshot.docs.isNotEmpty) {
-      // Get the first document (assuming there's only one document with the specified Program ID)
       DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
 
-      // Add the 'Patient Number' field to the document
       await documentSnapshot.reference.update({'Patient Number': widget.pid});
     } else {
-      // Handle the case where no documents match the query
       print('No documents found with Program ID: $pid');
     }
-
-    //     // Proceed with adding the program using the programId
-    //     List<Map<String, dynamic>> activitiesList = [];
-
-    //     for (int i = 0; i < widget.numberOfActivities; i++) {
-    //       String? selectedActivity = _selectedActivities[i];
-    //       int frequency = _frequencies[i] ?? 1;
-
-    //       // Check if the activity is selected before adding it to the list
-    //       if (selectedActivity != null) {
-    //         activitiesList.add({
-    //           'Activity Name': selectedActivity,
-    //           'Frequency': frequency,
-    //         });
-    //       }
-    //     }
-
-    //     Map<String, dynamic> dataToSave = {
-    //       'Therapist ID': therapistId,
-    //       'Patient Number':
-    //           pid, // Add patient ID to associate program with patient
-    //       'Program ID': programId,
-    //       'Start Date': widget.startDate,
-    //       'End Date': widget.endDate,
-    //       'NumberOfActivities': widget.numberOfActivities,
-    //       'Activities': activitiesList,
-    //     };
-
-    //     // Add the program using the therapist's ID
-    //     await FirebaseFirestore.instance
-    //         .collection('Program')
-    //         .doc(programId)
-    //         .set(dataToSave);
-
-    //     Navigator.of(context).pushNamed('homepage');
-
-    //     QuickAlert.show(
-    //       context: context,
-    //       text: "The Program is in your list now!",
-    //       type: QuickAlertType.success,
-    //     );
-    //   } else {
-    //     print('User is not authenticated');
-    //   }
-    // } catch (e) {
-    //   print('Error adding to Firestore: $e');
-    // }
   }
 
   @override
@@ -138,7 +50,7 @@ class _pickProgramState extends State<pickProgram> {
       create: (context) => SelectedProgram(),
       child: Scaffold(
         backgroundColor: const Color(0xFF186257),
-      //  bottomNavigationBar: const NavBar(),
+        //  bottomNavigationBar: const NavBar(),
         body: SafeArea(
           child: StreamBuilder<List<Report>>(
               stream: FirestoreService().streamPatientReports(widget.pid),
@@ -351,25 +263,23 @@ class _pickProgramState extends State<pickProgram> {
                                               !programsWithReport.contains(
                                                   selectedProgram
                                                       ._selectedProgram)) {
-                                             Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ReportDetails(
-                                                      pid: selectedProgram
-                                                          ._selectedProgram!
-                                                          .pid,
-                                                    ),
-                                                  ),
-                                                );
-                                                _AddPatientNumber(
-                                                    selectedProgram
-                                                        ._selectedProgram!.pid);
-                                            }
-                                            // Navigation code
-                                            // print(
-                                            //     'Navigating to ReportDetails page');
-                                           else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ReportDetails(
+                                                  pid: selectedProgram
+                                                      ._selectedProgram!.pid,
+                                                ),
+                                              ),
+                                            );
+                                            _AddPatientNumber(selectedProgram
+                                                ._selectedProgram!.pid);
+                                          }
+                                          // Navigation code
+                                          // print(
+                                          //     'Navigating to ReportDetails page');
+                                          else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(

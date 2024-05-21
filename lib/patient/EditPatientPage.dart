@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/background.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:quickalert/quickalert.dart';
 
 class EditPatientPage extends StatefulWidget {
@@ -274,7 +273,6 @@ class _EditPatientPageState extends State<EditPatientPage> {
           ),
         ],
       ),
-      bottomNavigationBar: const NavBar(),
     );
   }
 }

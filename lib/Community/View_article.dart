@@ -8,7 +8,6 @@ import 'package:flutter_application_1/Community/EditArticleScreen.dart';
 import 'package:flutter_application_1/services/authentic.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import '../home/loadingpage.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -306,7 +305,7 @@ class ViewArticleState extends State<View_article> {
                 ),
               ],
             ),
-            bottomNavigationBar: const NavBar(),
+  
           );
         },
       );

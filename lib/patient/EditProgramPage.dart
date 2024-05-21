@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/patient/programDetails.dart';
 import 'package:flutter_application_1/services/models.dart';
 import 'package:flutter_application_1/shared/background.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';

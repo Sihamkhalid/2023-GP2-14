@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Community/View_article.dart';
 import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/shared/bottom_nav.dart';
-import '../shared/nav_bar.dart';
 import '../services/models.dart';
 import '../services/firestore.dart';
 import '../patient/patientPage.dart';
@@ -29,19 +28,14 @@ class _HomePageState extends State<homePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loading();
   }
 
   @override
   Widget build(BuildContext context) {
-    // if (isLoading) {
-    //   return LoadingPage();
-    // } else {}
     return Scaffold(
       backgroundColor: const Color(0xFF186257),
-      //bottomNavigationBar: NavBar(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).pushNamed('AddpatientScreen');
@@ -282,34 +276,15 @@ class _HomePageState extends State<homePage> with TickerProviderStateMixin {
                                                       SizedBox(
                                                         width: 5,
                                                       ),
-                                                      // Add space between the left edge and the author name
                                                       Text(
                                                         card.name,
                                                         style: const TextStyle(
                                                           fontSize: 15,
-                                                          // fontWeight: FontWeight.bold,
                                                           color: Colors.black,
                                                         ),
                                                       ),
-                                                      // // Add space between the name and the icon
-                                                      // const SizedBox(width: 50),
                                                     ],
                                                   ),
-                                                  // const SizedBox(height: 5),
-                                                  // Text(
-                                                  //   card.Content.length > 60
-                                                  //       ? '${card.Content.substring(0, 60)}... '
-                                                  //       : card.Content,
-                                                  //   style: const TextStyle(
-                                                  //     color: Color.fromARGB(
-                                                  //         255, 62, 62, 62),
-                                                  //     fontSize: 11,
-                                                  //     fontFamily: 'RobotoSerif',
-                                                  //   ),
-                                                  //   //textAlign: TextAlign.justify,
-                                                  // ),
-                                                  // Add "Read more" link if the content is longer
-
                                                   Row(
                                                     children: [
                                                       SizedBox(
@@ -317,7 +292,6 @@ class _HomePageState extends State<homePage> with TickerProviderStateMixin {
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
-                                                          // Handle "Read more" button click
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
@@ -440,9 +414,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Color patientColor = widget.isPatientClicked
-        ? Colors.blue
-        : Colors.white; // Change the color based on the clicked state
+    Color patientColor = widget.isPatientClicked ? Colors.blue : Colors.white;
     return SingleChildScrollView(
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -528,8 +500,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 }
                               }
                             }
-                            // filteredPatients.removeWhere(
-                            //     (patient) => patient.performance == -1);
                           } else if (value == 'lowToHigh') {
                             dropdownvalue = value!;
                             //Sort by performance low to high and exclude patients with -1 performance
@@ -545,8 +515,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 }
                               }
                             }
-                            // filteredPatients.removeWhere(
-                            //     (patient) => patient.performance == -1);
                           } else if (value == 'all') {
                             dropdownvalue = value!;
                             filteredPatients = allPatients;
@@ -584,14 +552,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                         break;
                     }
 
-                    // Check if the dropdown value is highToLow or lowToHigh, and if performance is -1
-                    // If yes, skip rendering this patient
-                    // if ((dropdownvalue == 'highToLow' ||
-                    //         dropdownvalue == 'lowToHigh') &&
-                    //     performance == -1) {
-                    //   return SizedBox.shrink(); // Skip rendering this patient
-                    // }
-
                     return Column(
                       children: [
                         Container(
@@ -608,7 +568,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                             title: Text(pname),
                             subtitle: Text('Patient #$pnum'),
                             trailing: Text(
-                              '${  performance == -1 ? ' No report available' : '$performance%'}',
+                              '${performance == -1 ? ' No report available' : '$performance%'}',
                               style: TextStyle(
                                 fontSize: performance == -1 ? 11 : 15,
                                 color: performance > 50

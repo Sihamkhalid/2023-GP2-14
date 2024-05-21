@@ -6,7 +6,6 @@ import 'package:flutter_application_1/Community/View_article.dart';
 import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/shared/bottom_nav.dart';
 import 'package:intl/intl.dart';
-import '../../shared/nav_bar.dart';
 import '../../services/models.dart';
 import '../../services/firestore.dart';
 
@@ -628,14 +627,13 @@ class _CommunityState extends State<Community> with TickerProviderStateMixin {
                                             searchQuery.toLowerCase()))
                                     .toList();
 
-                                // Display the filtered articles using the common buildArticleCards function
+                                
                                 return Column(
                                   children: buildArticleCards(filteredCards),
                                 );
                               },
                             ),
-                            // Tab: Favourite (Placeholder text for now)
-                          //  Text('No Favourite yet')
+                          
                           ],
                         ),
                       ),

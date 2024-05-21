@@ -1,5 +1,4 @@
 import 'dart:io';
-//import 'dart:js_interop';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
 import 'package:flutter_application_1/shared/background.dart';
 import 'package:flutter_application_1/shared/bottom_nav.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -23,7 +21,6 @@ class Write_article extends StatefulWidget {
 }
 
 class _Write_article_State extends State<Write_article> {
-  //String imageUrl = '';
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _articleController = TextEditingController();
@@ -34,47 +31,36 @@ class _Write_article_State extends State<Write_article> {
   bool pressed = false;
   late String name;
   late Stream<Therapist> therapistStream;
-  // void initState() {
-  //   super.initState();
-  //   //name = (FirestoreService().streamTherapist() as Therapist).name;
-  // }
 
- File? selectedPdf;
+  File? selectedPdf;
   String? pdfUrl;
 
-  // Method to pick a PDF file
-Future<void> _pickPdf() async {
-  final pickedFile = await FilePicker.platform.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: ['pdf'],
-  );
+  Future<void> _pickPdf() async {
+    final pickedFile = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
 
-  if (pickedFile != null) {
-    // Upload PDF to Firebase Storage
-    final Reference storageReference = FirebaseStorage.instance.ref().child('pdfs/${DateTime.now()}.pdf');
-    final File pdfFile = File(pickedFile.files.single.path!);
-    final UploadTask uploadTask = storageReference.putFile(pdfFile);
+    if (pickedFile != null) {
+      // Upload PDF to Firebase Storage
+      final Reference storageReference =
+          FirebaseStorage.instance.ref().child('pdfs/${DateTime.now()}.pdf');
+      final File pdfFile = File(pickedFile.files.single.path!);
+      final UploadTask uploadTask = storageReference.putFile(pdfFile);
 
-    try {
-      // Wait for the upload to complete
-      await uploadTask;
+      try {
+        await uploadTask;
 
-      // Get the uploaded PDF URL
-      pdfUrl = await storageReference.getDownloadURL();
+        pdfUrl = await storageReference.getDownloadURL();
 
-      // Show a success message or navigate to another screen
-      print('PDF uploaded successfully! URL: $pdfUrl');
-    } catch (error) {
-      // Handle errors during PDF upload
-      print('Error uploading PDF: $error');
+        print('PDF uploaded successfully! URL: $pdfUrl');
+      } catch (error) {
+        print('Error uploading PDF: $error');
+      }
+    } else {
+      print('Please pick a PDF file.');
     }
-  } else {
-    // Handle case when no PDF is selected
-    print('Please pick a PDF file.');
   }
-}
-
-
 
   Future<void> _pickImage() async {
     final pickedFile =
@@ -90,51 +76,45 @@ Future<void> _pickPdf() async {
       UploadTask uploadTask = storageReference.putFile(imageFile);
 
       try {
-        // Wait for the upload to complete
         await uploadTask;
 
-        // Get the uploaded image URL
         imageUrl = await storageReference.getDownloadURL();
 
-        // Show a success message or navigate to another screen
         print('Image uploaded successfully! URL: $imageUrl');
 
-        // Refresh the UI to display the uploaded image
         setState(() {});
       } catch (error) {
-        // Handle errors during image upload
         print('Error uploading image: $error');
       }
     } else {
-      // Handle case when no image is selected
       print('Please pick an image first.');
     }
   }
 
   var user = AuthService().user;
-  
-Future<void> Publish() async {
-  String? modifiedPdfUrl = pdfUrl != null && pdfUrl!.isEmpty ? '' : pdfUrl;
 
-  Map<String, dynamic> dataToSave = {
-    'AutherID': user!.uid,
-    'name': name,
-    'PublishTime': FieldValue.serverTimestamp(),
-    'Title': _titleController.text,
-    'Content': _articleController.text,
-    'KeyWords': _keywordsController.text,
-    'image': imageUrl,
-    'pdfUrl': modifiedPdfUrl, // Add PDF URL here
-  };
+  Future<void> Publish() async {
+    String? modifiedPdfUrl = pdfUrl != null && pdfUrl!.isEmpty ? '' : pdfUrl;
 
+    Map<String, dynamic> dataToSave = {
+      'AutherID': user!.uid,
+      'name': name,
+      'PublishTime': FieldValue.serverTimestamp(),
+      'Title': _titleController.text,
+      'Content': _articleController.text,
+      'KeyWords': _keywordsController.text,
+      'image': imageUrl,
+      'pdfUrl': modifiedPdfUrl,
+    };
 
     bool allFieldsNotEmpty = true;
 
     dataToSave.forEach((key, value) {
-           // Validate all fields except PublishTime and pdfUrl
-    if (key != 'PublishTime' && key != 'pdfUrl' && (value == null || value.isEmpty)) {
-      allFieldsNotEmpty = false;
-    }
+      if (key != 'PublishTime' &&
+          key != 'pdfUrl' &&
+          (value == null || value.isEmpty)) {
+        allFieldsNotEmpty = false;
+      }
     });
 
     if (allFieldsNotEmpty) {
@@ -142,10 +122,8 @@ Future<void> Publish() async {
           .collection('Article')
           .add(dataToSave);
 
-      // Retrieve the auto-generated ID
       String autoGeneratedId = docRef.id;
 
-      // Update the document with the 'ID' field
       await docRef.update({'ID': autoGeneratedId});
 
       Navigator.of(context).pushNamed('communitypage');
@@ -174,8 +152,6 @@ Future<void> Publish() async {
     return Form(
       key: _formKey,
       child: Scaffold(
-        bottomNavigationBar:NavBar(),
-
         body: Stack(
           children: [
             Background(),
@@ -293,10 +269,7 @@ Future<void> Publish() async {
                                 },
                                 maxLines: null,
                               ),
-
                               SizedBox(height: 15),
-
-
                               TextFormField(
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -324,45 +297,40 @@ Future<void> Publish() async {
                                 },
                                 maxLines: null,
                               ),
-
-
-SizedBox(height: 15), // Add space between content and button
-
-ElevatedButton(
-  onPressed: _pickPdf,
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.white, // Change button background color
-    foregroundColor: Color.fromARGB(255, 77, 77, 77), // Change text color
-    fixedSize: Size(500, 60), // Set button size for both buttons
-    padding: EdgeInsets.fromLTRB(10, 0, 10, 0), // Adjust padding as needed
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
-      side: BorderSide(color: Color.fromARGB(255, 77, 77, 77)), // Add border
-    ),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(
-        Icons.upload,
-        size: 25,
-        color: Color.fromARGB(255, 77, 77, 77),
-      ),
-      SizedBox(width: 6),
-      Text(
-        'Upload PDF',
-        style: TextStyle(
-          fontSize: 15,
-        ),
-      ),
-    ],
-  ),
-),
-
-
-                              //image upload
                               SizedBox(height: 15),
-
+                              ElevatedButton(
+                                onPressed: _pickPdf,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor:
+                                      Color.fromARGB(255, 77, 77, 77),
+                                  fixedSize: Size(500, 60),
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(
+                                        color: Color.fromARGB(255, 77, 77, 77)),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.upload,
+                                      size: 25,
+                                      color: Color.fromARGB(255, 77, 77, 77),
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      'Upload PDF',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 15),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -380,8 +348,7 @@ ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       foregroundColor:
                                           Color.fromARGB(255, 77, 77, 77),
-                                      backgroundColor: Colors
-                                          .white, // Set the background color to white
+                                      backgroundColor: Colors.white,
                                       fixedSize: Size(500, 60),
                                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                       shape: RoundedRectangleBorder(
@@ -448,11 +415,9 @@ ElevatedButton(
                                     return LoadingPage();
                                   }
 
-                                  // Access the therapist object from the snapshot
                                   Therapist therapist =
                                       snapshot.data ?? Therapist();
 
-                                  // Access the name property of the Therapist object
                                   name = therapist.name;
                                   return Container();
                                 },
@@ -460,7 +425,6 @@ ElevatedButton(
                             ],
                           ),
                         ),
-                        // SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.all(40.0),
                           child: GestureDetector(
@@ -491,11 +455,8 @@ ElevatedButton(
             ),
           ],
         ),
-
-        // ],
       ),
     );
-    // );
   }
 }
 

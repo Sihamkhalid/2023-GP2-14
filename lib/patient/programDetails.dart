@@ -7,7 +7,6 @@ import 'package:flutter_application_1/empty.dart';
 import 'package:flutter_application_1/home/loadingpage.dart';
 import 'package:flutter_application_1/services/firestore.dart';
 import 'package:flutter_application_1/services/models.dart';
-import 'package:flutter_application_1/shared/nav_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_1/patient/EditProgramPage.dart';
 import 'package:path_provider/path_provider.dart';
@@ -73,50 +72,50 @@ class _ProgramDetailsState extends State<ProgramDetails> {
 return pw.Column(
   crossAxisAlignment: pw.CrossAxisAlignment.start,
   children: [
-    pw.SizedBox(height: 20), // Adding space at the top
+    pw.SizedBox(height: 20),
 
   pw.Center(
       child: pw.Text(
         'Program',
         style: pw.TextStyle(
           fontWeight: pw.FontWeight.bold,
-          fontSize: 24, // Increase font size for the title
-          color: PdfColors.blue, // Change color of the title
+          fontSize: 24,
+          color: PdfColors.blue, 
         ),
       ),
     ),
 
-    pw.SizedBox(height: 30), // Adding space between the title and the details
+    pw.SizedBox(height: 30), 
 
     // Patient Number
     pw.Text(
       'Patient Number: ${program.patientNum}',
       style: pw.TextStyle(
         fontWeight: pw.FontWeight.bold,
-        fontSize: 16, // Increase font size for details
-        color: PdfColors.black, // Change color of details
+        fontSize: 16, 
+        color: PdfColors.black,
       ),
     ),
 
-    pw.SizedBox(height: 10), // Adding space between details
+    pw.SizedBox(height: 10),
     // Program ID
     pw.Text(
       'Program ID: ${program.pid}',
       style: pw.TextStyle(
         fontWeight: pw.FontWeight.bold,
-        fontSize: 16, // Increase font size for details
-        color: PdfColors.black, // Change color of details
+        fontSize: 16,
+        color: PdfColors.black,
       ),
     ),
 
-    pw.SizedBox(height: 10), // Adding space between details
+    pw.SizedBox(height: 10), 
 
     pw.Text(
       'Start Date: ${DateFormat('yyyy-MM-dd').format(program.startDate.toDate())}',
       style: pw.TextStyle(
         fontWeight: pw.FontWeight.bold,
-        fontSize: 16, // Increase font size for details
-        color: PdfColors.black, // Change color of details
+        fontSize: 16, 
+        color: PdfColors.black,
       ),
     ),
 
@@ -124,8 +123,8 @@ return pw.Column(
       'End Date: ${DateFormat('yyyy-MM-dd').format(program.endDate.toDate())}',
       style: pw.TextStyle(
         fontWeight: pw.FontWeight.bold,
-        fontSize: 16, // Increase font size for details
-        color: PdfColors.black, // Change color of details
+        fontSize: 16,
+        color: PdfColors.black, 
       ),
     ),
 
@@ -135,12 +134,12 @@ return pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start, // Align content to the left
         children: [
           pw.SizedBox(height: 10
-          ), // Adding space between months and tables
+          ), 
         
          pw.Table.fromTextArray(
   border: null,
   headers: ['Activity', 'Frequency' , 'Days per week:'],
-  headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 16), // Make headers bold and adjust font size
+  headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 16), 
   data: List<List<String>>.generate(
     program.activities.length,
     (activityIndex) {
@@ -151,7 +150,7 @@ return pw.Column(
       ];
     },
   ),
-  cellStyle: pw.TextStyle(fontSize: 14), // Adjust font size for cells
+  cellStyle: pw.TextStyle(fontSize: 14),
   cellPadding: pw.EdgeInsets.symmetric(vertical: 8, horizontal: 12),
   headerDecoration: pw.BoxDecoration(color: PdfColors.grey300),
   cellAlignments: {
@@ -163,7 +162,6 @@ return pw.Column(
 
         ],
       ),
-    // Adding space between details and tables
     pw.SizedBox(height: 10),
  
   ],
